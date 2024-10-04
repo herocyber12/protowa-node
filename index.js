@@ -11,7 +11,9 @@ app.use(express.json());
 let qrCodeData = '';  // Variabel untuk menyimpan QR code sementara
 
 const client = new Client({
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth({
+        clientId:'client1'
+    })
 });
 
 client.on('qr', (qr) => {
@@ -31,7 +33,7 @@ app.get('/get-qr', (req, res) => {
     if (qrCodeData) {
         res.status(200).json({ qr: qrCodeData });
     } else {
-        res.status(200).json({ qr: null });
+        res.status(200).json({ qr: null,msg: 'No Hp Masih' });
     }
 });
 
